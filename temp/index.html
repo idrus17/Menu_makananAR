@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Testing ARJS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+      .buttons {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 5em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+      }
+    
+      .say-hi-button {
+        padding: 0.25em;
+        border-radius: 4px;
+        border: none;
+        background: white;
+        color: black;
+        width: 4em;
+        height: 2em;
+      }
+    </style>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <!-- we import arjs version without NFT but with marker + location based support -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
+    <!-- <script src="server.js"></script> -->
+    <!-- <script src="marker-events.js"></script> -->
+    <script>
+      window.onload = function () {
+        document
+          .querySelector(".say-hi-button")
+          .addEventListener("click", function () {
+            // here you can change also a-scene or a-entity properties, like
+            // changing your 3D model source, size, position and so on
+            // or you can just open links, trigger actions...
+            alert("Hi Idrus!");
+          });
+      };
+    </script>
+  </head>
+
+<!-- <body style="margin : 0px; overflow: hidden;"> -->
+<body>
+    <!-- <nav>
+      <ul>
+        <li><a href="">beranda</a></li>
+        <li><a href="">tentang</a></li>
+        <li><a href="">kontak</a></li>
+        <li><a href="">kerja</a></li>
+      </ul>
+    </nav> -->
+  <div class="buttons">
+      <button type="button" class="btn btn-primary say-hi-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+      </button>
+  </div>
+  <div class="container">
+    <a-scene arjs embedded 
+    renderer="logarithmicDepthBuffer: true;"
+    vr-mode-ui="enabled: false"
+    gesture-detector
+    id="scene"
+  >
+      <a-marker preset="hiro">
+        <a-entity 
+          position="0 0 0"
+          scale="0.05 0.05 0.05"
+          gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+        ></a-entity>
+      </a-marker>
+        <a-marker preset="pattern" type="pattern" url="pattern-TES3.patt">
+        <a-entity 
+          position="0 0 0"
+          scale="0.05 0.05 0.05"
+          gltf-model="mie.glb"
+        ></a-entity>
+      </a-marker>
+      <a-marker preset="pattern" type="pattern" url="marker/pattern-greentea.patt">
+        <a-entity
+          position="0 0 0"
+          scale="0.05 0.05 0.05"
+          gltf-model="model/cangkir.glb"
+        ></a-entity>
+      </a-marker>
+      <a-marker preset="pattern" type="pattern" url="marker/pattern-chicken.patt">
+        <a-entity
+          position="0 0 0"
+          scale="0.05 0.05 0.05"
+          gltf-model="model/CHICKEN.glb"
+        ></a-entity>
+      </a-marker>
+      <a-marker preset="pattern" type="pattern" url="marker/pattern-onion ring.patt">
+        <a-entity
+          position="0 0 0"
+          scale="0.05 0.05 0.05"
+          gltf-model="model/ONION RING.glb"
+        ></a-entity>
+      </a-marker>
+      <a-marker preset="pattern" type="pattern" url="marker/pattern-french freis.patt">
+        <a-entity
+          position="0 0 0"
+          scale="0.05 0.05 0.05"
+          gltf-model="model/french frice.glb"
+        ></a-entity>
+      </a-marker>
+      <a-marker preset="pattern" type="pattern" url="marker/pattern-donat.patt">
+        <a-entity
+          position="0 0 0"
+          scale="0.05 0.05 0.05"
+          gltf-model="model/donat part1.glb"
+        ></a-entity>
+      </a-marker>
+      <a-marker preset="pattern" type="pattern" url="marker/pattern-mocacino.patt">
+        <a-entity
+        text="font: mozillavr; value: Kopi Hitam."
+        rotation="0 0 0" animation="property: rotation; to: 0 0 0; loop: true; dur: 10500"
+        gltf-model="model/CANGKIR COKLAT big.glb"
+        >  
+      </a-entity>
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+  </div>
+</body>
+</html>
