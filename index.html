@@ -76,7 +76,9 @@
                         // var markerId = marker.id;
                         // console.log('markerLost', markerId);
                         markerId = "";
-                        var button = document.querySelector("#btn-info");
+                        var 
+                        container = document.querySelector("#container-fluid");
+                        button = document.querySelector("#btn-info");
                         button.style.display = 'none';
                         // TODO: Add your own code here to react to the marker being lost.
                     });
@@ -111,12 +113,13 @@
     </head>
 
     <body>
-        <div class="container-fluid bg-dark"></div>
-            <h1>tes</h1>
+        <!-- kontener -->
+        <div class="container p-5 my-5 bg-dark text-white"></div>
+            <container type="container" class="container p-5 my-5 bg-dark text-white"></container>
         <!-- button refresh page -->
-        <div class="buttons", >
+        <div class="buttons">
             <button type="button" class="btn btn-primary say-hi-button" onclick="refreshPage();">Reload</button>
-            <button type="button" id="btn-info" class="btn btn-success say-hi-button" style="display: none;">Info</button>
+            <button type="button" id="btn-info" class="btn btn-success say-hi-button" style="display: none;">Info</button> 
         </div>
         <!-- /button-->
 
