@@ -1,364 +1,46 @@
 <html>
     <head>
-        <!-- <title> <b>MENU MAKANAN AUGMENTED REALITY LALOMA </b> </title> -->
+        <title>MENU MAKANAN AUGMENTED REALITY LALOMA</title>
         <meta charset="utf-8">
-        <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, user-scalable=no" name="viewport">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <style>
-            body {
-                margin: 0px;
-                overflow: hidden;
-            }
-            .header {
-            background-color: #5c59fa;
-            color: azure;
-            padding: 5px;
-            text-align: center;
-}
-            .buttons {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                height: 5em;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 10;
-            }
-        </style>
-        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-        <script src="gesture-detector.js"></script>
-        <script src="gesture-handler.js"></script>
-        <script>
-            const refreshPage = () => {
-                let x = confirm("Yakin akan merefresh halaman?");
-                if(x){
-                    location.reload();
-                }else{
-                    alert('stay at here :D');
-                }
-            }
-        </script>
-        <script>
-            window.addEventListener('camera-init', (data) => {
-                console.log('camera-init', data);
-            });
-            window.addEventListener('camera-error', (error) => {
-                console.log('camera-error', error);
-            });
-            AFRAME.registerComponent('registerevents', {
-                init: function () {
-                    var marker = this.el;
-                    var markerId;
-                    marker.addEventListener('markerFound', function () {
-                        markerId = marker.id;
-                        console.log('markerFound', markerId);
-
-                        var button = document.querySelector("#btn-info");
-                        button.style.display = 'block';
-                        button.innerHTML = 'Informasi';
-                        button.addEventListener("click", function() {
-                            var informasi = document.querySelector(`#${markerId}`).dataset.informasi;
-                            alert(informasi);
-                        });
-                        
-                        // TODO: Add your own code here to react to the marker being found.
-                    });
-        
-                    marker.addEventListener('markerLost', function () {
-                        // var markerId = marker.id;
-                        // console.log('markerLost', markerId);
-                        markerId = "";
-                        var 
-                        // container = document.querySelector("#container");
-                        button = document.querySelector("#btn-info");
-                        button.style.display = 'none';
-                        // TODO: Add your own code here to react to the marker being lost.
-                    });
-                }
-            });
-            AFRAME.registerComponent('autoscale', {
-                schema: { type: 'number', default: 1 },
-                init: function () {
-                    this.scale();
-                    this.el.addEventListener('object3dset', () => this.scale());
-                },
-                scale: function () {
-                    const el = this.el;
-                    const span = this.data;
-                    const mesh = el.getObject3D('mesh');
-        
-                    if (!mesh) return;
-        
-                    // Compute bounds.
-                    const bbox = new THREE.Box3().setFromObject(mesh);
-        
-                    // Normalize scale.
-                    const scale = span / bbox.getSize().length();
-                    mesh.scale.set(scale, scale, scale);
-        
-                    // Recenter.
-                    const offset = bbox.getCenter().multiplyScalar(scale);
-                    mesh.position.sub(offset);
-                }
-            });
-        </script>
     </head>
-
     <body>
-        <!-- header -->
-        <div class="header"><h1>Menu Makanan AR Laloma</h1></div>
-        <!-- button refresh page -->
-        <div class="buttons">
-            <button type="button" class="btn btn-primary say-hi-button" onclick="refreshPage();">Reload</button>
-            <button type="button" id="btn-info" class="btn btn-success say-hi-button" style="display: none;">Info</button> 
-        </div>
-        <!-- /button-->
-
-        <a-scene arjs embedded renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" gesture-detector id="scene">
-            <!-- Aset Contoh -->
-            <a-assets>
-                <a-asset-item
-                    id="bowser"
-                    src="https://cdn.glitch.com/06bd98b4-97ee-4c07-a546-fe39ca205034%2Fbowser.glb"
-                >
-                </a-asset-item>
-            </a-assets>
-            <!-- Aset Trex -->
-            <a-assets>
-                <a-asset-item
-                    id="trex"
-                    src="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
-                >
-                </a-asset-item>
-            </a-assets>
-            <!-- Aset Mocacino (Cangkir Coklat Big) -->
-            <a-assets>
-                <a-asset-item
-                    id="cangkir-coklat"
-                    src="model/cangkir-coklat-big.glb"
-                >
-                </a-asset-item>
-            </a-assets>
-            <!-- Aset Green Tea -->
-            <a-assets>
-                <a-asset-item
-                    id="cangkir"
-                    src="model/cangkir.glb"
-                >
-                </a-asset-item>
-            </a-assets>
-            <!-- Aset Chicken -->
-            <a-assets>
-                <a-asset-item
-                    id="chicken"
-                    src="model/chicken-1.glb"
-                >
-                </a-asset-item>
-            </a-assets>
-            <!-- Aset Donat Part 1 -->
-            <a-assets>
-                <a-asset-item
-                    id="donat-part-1"
-                    src="model/donat-part-1.glb"
-                >
-                </a-asset-item>
-            </a-assets>
-            <!-- Aset French Fries -->
-            <a-assets>
-                <a-asset-item
-                    id="french-fries"
-                    src="model/french-fries.glb"
-                >
-                </a-asset-item>
-            </a-assets>
-            <!-- Aset Mie -->
-            <a-assets>
-                <a-asset-item
-                    id="mie"
-                    src="model/mie.glb"
-                >
-                </a-asset-item>
-            </a-assets>
-            <!-- Aset Onion Ring -->
-            <a-assets>
-                <a-asset-item
-                    id="onion-ring"
-                    src="model/ONIONRING.glb"
-                >
-                </a-asset-item>
-            </a-assets>
-            <!-- -------------------/////////////////////----------------- /-->
-            <!-- marker default for testing -->
-            <a-marker registerevents
-            preset="hiro" 
-            raycaster="objects: .clickable-trex-model"
-            emitevents="true"
-            cursor="fuse: false; rayOrigin: mouse;"
-            id="markerHiro"
-            data-informasi="Ini konten contoh ya :D">
-                <a-entity
-                    id="trex-model"
-                    position="0 0 0"
-                    scale="0.05 0.05 0.05"
-                    gltf-model="#trex"
-                    class="clickable-trex-model"
-                    gesture-handler
-                ></a-entity>
-            </a-marker>
-            <!--/ marker default -->
-
-            <!-- market mocacino -->
-            <a-marker registerevents 
-            preset="pattern" 
-            type="pattern" 
-            url="marker/pattern-mocacino.patt" 
-            raycaster="objects: .clickable-cangkir-coklat" 
-            emitevents="true"
-            cursor="fuse: false; rayOrigin: mouse;"
-            id="markerMocacino"
-            data-informasi="Mocacino. Rp. 18.000">
-                <a-entity
-                    id="cangkir-coklat-model"
-                    position="0 0 0"
-                    scale="0.05 0.05 0.05"
-                    gltf-model="#cangkir-coklat"
-                    class="clickable-cangkir-coklat"
-                    gesture-handler
-                ></a-entity>
-            </a-marker>
-            <!-- /market mocacino -->
-
-            <!-- market green tea -->
-            <a-marker registerevents
-            preset="pattern"
-            type="pattern"
-            url="marker/pattern-greentea.patt"
-            raycaster="objects: .clickable-cangkir"
-            emitevents="true"
-            cursor="fuse: false; rayOrigin: mouse;"
-            id="markerGreentea"
-            data-informasi="Green Tea Rp 20.000">
-                <a-entity
-                    id="cangkir-model"
-                    position="0 0 0"
-                    scale="0.05 0.05 0.05"
-                    gltf-model="#cangkir"
-                    class="clickable-cangkir"
-                    gesture-handler
-                ></a-entity>
-            </a-marker>
-            <!-- /market green tea -->
-
-            <!-- market chicken -->
-            <a-marker registerevents 
-            preset="pattern" 
-            type="pattern" 
-            url="marker/pattern-chicken.patt" 
-            raycaster="objects: .clickable-chicken" 
-            emitevents="true"
-            cursor="fuse: false; rayOrigin: mouse;" 
-            id="markerChicken" 
-            data-informasi="Chicken Rp 10.000 murah banget :)">
-                <a-entity
-                    id="chicken-model"
-                    position="0 0 0"
-                    scale="0.05 0.05 0.05"
-                    gltf-model="#chicken"
-                    class="clickable-chicken"
-                    gesture-handler
-                ></a-entity>
-            </a-marker>
-            <!-- /market chicken -->
-
-            <!-- market donat -->
-            <a-marker registerevents 
-            preset="pattern" 
-            type="pattern" 
-            url="marker/pattern-donat.patt" 
-            raycaster="objects: .clickable-donat" 
-            emitevents="true"
-            cursor="fuse: false; rayOrigin: mouse;"
-            id="markerDonat"
-            data-informasi="Donat, Rp 9.000">
-                <a-entity
-                    id="donat-model"
-                    position="0 0 0"
-                    scale="0.05 0.05 0.05"
-                    gltf-model="#donat-part-1"
-                    class="clickable-donat"
-                    gesture-handler
-                ></a-entity>
-            </a-marker>
-            <!-- /market donat -->
-
-            <!-- market french-fries -->
-            <a-marker registerevents 
-            preset="pattern" 
-            type="pattern" 
-            url="marker/pattern-french-fries.patt" 
-            raycaster="objects: .clickable-french-fries" 
-            emitevents="true"
-            cursor="fuse: false; rayOrigin: mouse;"
-            id="markerFrenchFries"
-            data-informasi="French Fries, Rp 9.000">
-                <a-entity
-                    id="french-fries-model"
-                    position="0 0 0"
-                    scale="0.05 0.05 0.05"
-                    gltf-model="#french-fries"
-                    class="clickable-french-fries"
-                    gesture-handler
-                ></a-entity>
-            </a-marker>
-            <!-- /market french-fries -->
-
-            <!-- market mie -->
-            <a-marker registerevents 
-            preset="pattern" 
-            type="pattern" 
-            url="marker/pattern-mie-ramen.patt" 
-            raycaster="objects: .clickable-mie" 
-            emitevents="true"
-            cursor="fuse: false; rayOrigin: mouse;"
-            id="markerMie"
-            data-informasi="Mie, Rp 20.000">
-                <a-entity
-                    id="mie-model"
-                    position="0 0 0"
-                    scale="0.05 0.05 0.05"
-                    gltf-model="#mie"
-                    class="clickable-mie"
-                    gesture-handler
-                ></a-entity>
-            </a-marker>
-            <!-- /market mie -->
-
-            <!-- market onion-ring -->
-            <a-marker registerevents 
-            preset="pattern" 
-            type="pattern" 
-            url="marker/pattern-onion-ring.patt" 
-            raycaster="objects: .clickable-onion-ring" 
-            emitevents="true"
-            cursor="fuse: false; rayOrigin: mouse;"
-            id="markerOnionRing"
-            data-informasi="Onion Ring, Rp 20.000">
-                <a-entity
-                    id="onion-ring-model"
-                    position="0 0 0"
-                    scale="0.05 0.05 0.05"
-                    gltf-model="#onion-ring"
-                    class="clickable-onion-ring"
-                    gesture-handler
-                ></a-entity>
-            </a-marker>
-            <!-- /market onion-ring -->
-
-            <a-entity camera></a-entity>
-        </a-scene>
+        <section class="content">
+            <div class="container-fluid">
+                <br>
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+                        <div class="card mb-2">
+                            <div class="card-header">
+                            Menu Makanan Augmented Reality Laloma
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Deskripsi Aplikasi</h5>
+                                <p class="card-text">......................................?</p>
+                            </div>
+                        </div>
+                        <!-- tampilkan iframe kamera scan -->
+                        <div class="card">
+                            <div class="card-header">
+                                Arahkan kamera pada marker :)
+                                </div>
+                            <div class="card-body">
+                                <div class="d-lg-none">
+                                    <fieldset style="border: 1px solid #6B6F82; padding: 10px; margin: inherit; display: block; height: 70vh;">
+                                        <iframe width="100%" height="100%" style="border:none;" src="https://idrus17.github.io/Menu_makananAR/scan.html" allowfullscreen="allowfullscreen"></iframe>
+                                    </fieldset>
+                                </div>
+                                <div class="d-none d-lg-block">
+                                    <fieldset style="border: 1px solid #6B6F82; padding: 10px; margin: inherit; display: block; height: 80vh;">
+                                        <iframe width="100%" height="100%" style="border:none;" src="https://idrus17.github.io/Menu_makananAR/scan.html" allowfullscreen="allowfullscreen"></iframe>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </body>
 </html>
