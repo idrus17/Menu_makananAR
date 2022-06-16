@@ -9,17 +9,17 @@
                 margin: 0px;
                 overflow: hidden;
             }
-            .container-fluid bg-dark {
+            /* .container bg-dark {
                 position: absolute;
-                bottom: 0;
-                left: 0;
+                top: 80px;
+                left: 30;
                 width: 100%;
                 height: 5em;
-                display: flex;
+                display: b;
                 justify-content: center;
                 align-items: center;
                 z-index: 10;
-            }
+            } */
             .buttons {
                 position: absolute;
                 bottom: 0;
@@ -77,7 +77,7 @@
                         // console.log('markerLost', markerId);
                         markerId = "";
                         var 
-                        container = document.querySelector("#container-fluid");
+                        // container = document.querySelector("#container");
                         button = document.querySelector("#btn-info");
                         button.style.display = 'none';
                         // TODO: Add your own code here to react to the marker being lost.
@@ -114,7 +114,7 @@
 
     <body>
         <!-- kontener -->
-        <div class="container p-5 my-5 bg-dark text-white"></div>
+        <div class="container p-5 my-5 bg-dark text-white" position: absolute;>tes</div>
             <container type="container" class="container p-5 my-5 bg-dark text-white"></container>
         <!-- button refresh page -->
         <div class="buttons">
