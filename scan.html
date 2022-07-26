@@ -133,11 +133,19 @@
                 >
                 </a-asset-item>
             </a-assets>
-            <!-- Aset Mocacino (Cangkir Coklat Big) -->
+            <!-- Aset Mocacino -->
             <a-assets>
                 <a-asset-item
                     id="CANGKIR COKLATnew"
                     src="model/CANGKIR COKLATnew.glb"
+                >
+                </a-asset-item>
+            </a-assets>
+               <!-- Aset Smoothy -->
+               <a-assets>
+                <a-asset-item
+                    id="Smoothy"
+                    src="model/Smothy.glb"
                 >
                 </a-asset-item>
             </a-assets>
@@ -229,6 +237,47 @@
                 ></a-entity>
             </a-marker>
             <!-- /market mocacino -->
+                        <!-- market mocacino -->
+            <a-marker registerevents 
+            preset="pattern" 
+            type="pattern" 
+            url="marker/pattern-mocacino.patt" 
+            raycaster="objects: .clickable-cangkir-coklat" 
+            emitevents="true"
+            cursor="fuse: false; rayOrigin: mouse;"
+            id="markerMocacino"
+            data-informasi="Mocacino. Rp. 18.000">
+                <a-entity
+                    id="CANGKIR COKLATnew"
+                    position="0 0 0"
+                    scale="0.05 0.05 0.05"
+                    gltf-model="#CANGKIR COKLATnew"
+                    class="clickable-cangkir-coklat"
+                    gesture-handler
+                ></a-entity>
+            </a-marker>
+            <!-- /market mocacino -->
+
+                        <!-- market Smoothy -->
+                        <a-marker registerevents 
+                        preset="pattern" 
+                        type="pattern" 
+                        url="marker/pattern-Smoothy.patt" 
+                        raycaster="objects: .clickable-Smoothy" 
+                        emitevents="true"
+                        cursor="fuse: false; rayOrigin: mouse;"
+                        id="markerSmoothy"
+                        data-informasi="Smoothy. Rp. 18.000">
+                            <a-entity
+                                id="Smoothy"
+                                position="0 0 0"
+                                scale="0.05 0.05 0.05"
+                                gltf-model="#Smoothy"
+                                class="clickable-Smoothy"
+                                gesture-handler
+                            ></a-entity>
+                        </a-marker>
+                        <!-- /market Smoothy -->
 
             <!-- market green tea -->
             <a-marker registerevents
